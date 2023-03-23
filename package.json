@@ -1,0 +1,48 @@
+{
+  "name": "@little-island/ecs",
+  "version": "0.1.4",
+  "description": "Modular Entity Component System",
+  "main": "./build/index.cjs",
+  "module": "./build/index.mjs",
+  "types": "./build/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./build/index.cjs",
+      "import": "./build/index.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsc && npx rollup --config rollup.config.mjs",
+    "package": "npm run build && npm run push && npm version patch && npm publish --access=public",
+    "postversion": "git push && git push --tags",
+    "prepare": "npm run build",
+    "push": "git add -A && git commit -m \"Setup Package\" && git push",
+    "version": "git add -A src"
+  },
+  "keywords": [],
+  "author": "Nikolas Karinja",
+  "license": "ISC",
+  "files": [
+    "build/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikolas-karinja/ecs.git"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@types/uuid": "^9.0.1",
+    "rollup-plugin-dts": "^5.3.0",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/nikolas-karinja/ecs/issues"
+  },
+  "homepage": "https://github.com/nikolas-karinja/ecs#readme",
+  "directories": {
+    "lib": "lib"
+  }
+}
