@@ -8,9 +8,9 @@ export class ECSComponent {
 
     public Parent: ECSEntity
 
-    constructor( parent: ECSEntity, options?: ComponentOptions ) {
+    constructor ( parent: ECSEntity, options: ComponentOptions ) {
 
-        this.Parent = parent
+        this.Parent  = parent
 
     }
 

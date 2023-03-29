@@ -16,7 +16,12 @@ const config = [
             }
         ],
         plugins: [ nodeResolve() ],
-        external: [ 'uuid' ]
+        external: [ 
+            'uuid', 
+            'three',
+            'three/examples/jsm/loaders/GLTFLoader',
+            'three/examples/jsm/utils/SkeletonUtils',
+        ]
     },
     {
         input: "lib/index.d.ts",

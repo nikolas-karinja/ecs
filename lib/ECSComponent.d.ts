@@ -4,7 +4,7 @@ export interface ComponentOptions {
 export declare class ECSComponent {
     active: boolean;
     Parent: ECSEntity;
-    constructor(parent: ECSEntity, options?: ComponentOptions);
+    constructor(parent: ECSEntity, options: ComponentOptions);
     destroy(): void;
     initComponent(): void;
     initEntity(): void;

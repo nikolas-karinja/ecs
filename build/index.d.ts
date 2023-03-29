@@ -1,3 +1,6 @@
+import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
+import * as THREE from 'three';
+
 interface EntityOptions {
 }
 declare class ECSEntity {
@@ -58,7 +61,7 @@ interface ComponentOptions {
 declare class ECSComponent {
     active: boolean;
     Parent: ECSEntity;
-    constructor(parent: ECSEntity, options?: ComponentOptions);
+    constructor(parent: ECSEntity, options: ComponentOptions);
     destroy(): void;
     initComponent(): void;
     initEntity(): void;
@@ -72,4 +75,60 @@ declare class ECSComponent {
     update(deltaTime: number, elapsedTime: number, updateAnim: boolean): void;
 }
 
-export { ECSComponent as Component, ComponentOptions, ECSEntity as Entity, EntityOptions, ECSManager as Manager };
+declare class GLTFAnimation {
+    Action: THREE.AnimationAction;
+    Clip: THREE.AnimationClip;
+    Mixer: THREE.AnimationMixer;
+    constructor(mixer: THREE.AnimationMixer, clip: THREE.AnimationClip);
+}
+declare class GLTFAnimationStorage {
+    count: number;
+    currentBaseAnimName: string;
+    Stored: {
+        [key: string]: GLTFAnimation;
+    };
+    activate(name: string): void;
+    init(): void;
+}
+interface GLTFModelOptions extends ComponentOptions {
+    data: GLTF;
+    onModelLoaded?: (model: GLTF, scene: THREE.Object3D) => {};
+    parent?: THREE.Object3D;
+    sceneIndex?: number;
+    startAnimName?: string;
+    storeAnimations?: boolean;
+}
+declare class GLTFModel extends ECSComponent {
+    private storeAnimations;
+    Animations: GLTFAnimationStorage;
+    Mixer: THREE.AnimationMixer;
+    Model: GLTF;
+    ModelGroup: THREE.Object3D;
+    Skeleton: THREE.SkeletonHelper;
+    constructor(parent: ECSEntity, options: GLTFModelOptions);
+    private determineModelGroup;
+    private initAnimations;
+    private loadAnimations;
+    cloneSkeleton(modelGroup: THREE.Object3D): THREE.Object3D;
+    executeCrossFade(startAnimation: GLTFAnimation, endAnimation: GLTFAnimation, duration: number): void;
+    hideSkeleton(): void;
+    playAnimation(name: string, fadeDuration: number): void;
+    playAnimationWithDelay(name: string, fadeDuration: number, delayInSeconds?: number): void;
+    prepareCrossFade(startAnimation: GLTFAnimation, endAnimation: GLTFAnimation, duration: number): void;
+    setTimeScale(speed: number): void;
+    setWeight(animation: GLTFAnimation, weight: number): void;
+    showSkeleton(): void;
+    synchronizeCrossFade(startAnimation: GLTFAnimation, endAnimation: GLTFAnimation, duration: number): void;
+    initComponent(): void;
+    onUpdate(deltaTime: number, elapsedTime: number): void;
+}
+
+type index_d_GLTFModel = GLTFModel;
+declare const index_d_GLTFModel: typeof GLTFModel;
+declare namespace index_d {
+  export {
+    index_d_GLTFModel as GLTFModel,
+  };
+}
+
+export { ECSComponent as Component, ComponentOptions, index_d as Components, ECSEntity as Entity, EntityOptions, ECSManager as Manager };
