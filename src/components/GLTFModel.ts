@@ -89,9 +89,9 @@ export class GLTFModel extends ECSComponent {
         this.Mixer      = new THREE.AnimationMixer( this.ModelGroup )
         this.Skeleton   = new THREE.SkeletonHelper( this.ModelGroup )
 
-        if ( options.onModelLoaded ) options.onModelLoaded( this.Model, this.ModelGroup )
-        if ( this.storeAnimations ) this.initAnimations( options )
-        if ( options.parent ) options.parent.add( this.ModelGroup, this.Skeleton )
+        if ( this.storeAnimations ) this.initAnimations()
+
+        this.setOptions( options )
 
     }
 
@@ -101,7 +101,7 @@ export class GLTFModel extends ECSComponent {
 
     }
 
-    private initAnimations ( options: GLTFModelOptions ) {
+    private initAnimations () {
 
         this.loadAnimations()
 
@@ -116,6 +116,13 @@ export class GLTFModel extends ECSComponent {
             this.Animations.Stored[ a.name ] = new GLTFAnimation( this.Mixer, a )
 
         }
+
+    }
+
+    private setOptions ( options: GLTFModelOptions ) {
+
+        if ( options.onModelLoaded ) options.onModelLoaded( this.Model, this.ModelGroup )
+        if ( options.parent ) options.parent.add( this.ModelGroup, this.Skeleton )
 
     }
 
