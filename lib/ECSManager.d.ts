@@ -18,7 +18,7 @@ export default class ECSManager {
     name: string;
     uuid: string;
     Assemblies: {
-        [key: string]: Function;
+        [key: string]: any;
     };
     Entities: Entities;
     constructor();

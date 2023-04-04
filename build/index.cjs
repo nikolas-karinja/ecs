@@ -139,7 +139,7 @@ class ECSManager {
         this.add(e, entityName);
     }
     createAssembly(name, buildMethod) {
-        this.Assemblies[name] = buildMethod ? buildMethod : () => { };
+        this.Assemblies[name] = buildMethod ? buildMethod : (e) => { };
     }
     filter(cb) {
         return this.Entities.array.filter(cb);
