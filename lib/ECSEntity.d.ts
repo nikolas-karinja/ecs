@@ -7,7 +7,7 @@ export declare class ECSEntity {
     uuid: string;
     name: string;
     Components: {
-        [key: string]: ECSComponent;
+        [key: string]: ECSComponent | any;
     };
     Manager: ECSManager;
     Parent: ECSManager;
@@ -15,7 +15,7 @@ export declare class ECSEntity {
     addComponent(componentClass: typeof ECSComponent, options?: ComponentOptions): void;
     destroy(): void;
     findEntity(name: string): ECSEntity;
-    getComponent(name: string): ECSComponent;
+    getComponent(name: string): any;
     initEntity(): void;
     setActive(value: boolean): void;
     setName(name: string): void;

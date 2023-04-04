@@ -8,7 +8,7 @@ declare class ECSEntity {
     uuid: string;
     name: string;
     Components: {
-        [key: string]: ECSComponent;
+        [key: string]: ECSComponent | any;
     };
     Manager: ECSManager;
     Parent: ECSManager;
@@ -16,7 +16,7 @@ declare class ECSEntity {
     addComponent(componentClass: typeof ECSComponent, options?: ComponentOptions): void;
     destroy(): void;
     findEntity(name: string): ECSEntity;
-    getComponent(name: string): ECSComponent;
+    getComponent(name: string): any;
     initEntity(): void;
     setActive(value: boolean): void;
     setName(name: string): void;
@@ -69,7 +69,7 @@ declare class ECSComponent {
     onAnimUpdate(deltaTime: number, elapsedTime: number): void;
     get Manager(): ECSManager;
     findEntity(name: string): ECSEntity;
-    getComponent(name: string): ECSComponent;
+    getComponent(name: string): any;
     isActive(): boolean;
     setActive(value: boolean): void;
     update(deltaTime: number, elapsedTime: number, updateAnim: boolean): void;

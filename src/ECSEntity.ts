@@ -13,7 +13,7 @@ export class ECSEntity {
     public uuid : string = uuidV4()
     public name : string = `ecs-entity#${ instances + 1 }`
 
-    public Components: { [ key: string ]: ECSComponent } = {}
+    public Components: { [ key: string ]: ECSComponent | any } = {}
     public Manager 
     public Parent
 
