@@ -20,7 +20,7 @@ const config = [
             'uuid', 
             'three',
             'three/examples/jsm/loaders/GLTFLoader',
-            'three/examples/jsm/utils/SkeletonUtils',
+            'three/examples/jsm/utils/SkeletonUtils.js',
         ]
     },
     {

@@ -1,7 +1,7 @@
 'use strict';
 
 var uuid = require('uuid');
-var SkeletonUtils = require('three/examples/jsm/utils/SkeletonUtils');
+var SkeletonUtils = require('three/examples/jsm/utils/SkeletonUtils.js');
 var THREE = require('three');
 
 function _interopNamespaceDefault(e) {

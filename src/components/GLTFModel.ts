@@ -2,7 +2,7 @@ import { ComponentOptions, ECSComponent } from '../ECSComponent'
 import { ECSEntity } from '../ECSEntity'
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 
-import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils'
+import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils.js'
 import * as THREE from 'three'
 
 export class GLTFAnimation {

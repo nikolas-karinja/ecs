@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils';
+import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils.js';
 import * as THREE from 'three';
 
 class ECSComponent {
