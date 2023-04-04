@@ -68,7 +68,7 @@ export default class ECSManager {
         this.add( e, entityName )
     }
 
-    createAssembly ( name: string, buildMethod?: ( e : ECSEntity ) => {} ) {
+    createAssembly ( name: string, buildMethod?: ( e : ECSEntity ) => void ) {
 
         this.Assemblies[ name ] = buildMethod ? buildMethod : ( e: ECSEntity ) => {}
 

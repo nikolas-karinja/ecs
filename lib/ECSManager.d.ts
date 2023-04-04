@@ -24,7 +24,7 @@ export default class ECSManager {
     constructor();
     add(entity: ECSEntity, name: string): void;
     assemble(name: string, entityClass?: typeof ECSEntity, options?: Assembly): void;
-    createAssembly(name: string, buildMethod?: (e: ECSEntity) => {}): void;
+    createAssembly(name: string, buildMethod?: (e: ECSEntity) => void): void;
     filter(cb: () => {}): ECSEntity[];
     generateName(entity: ECSEntity): string;
     get(name: string): ECSEntity;
