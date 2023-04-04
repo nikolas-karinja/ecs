@@ -200,17 +200,14 @@ class GLTFModel extends ECSComponent {
         this.ModelGroup = this.determineModelGroup(options);
         this.Mixer = new THREE.AnimationMixer(this.ModelGroup);
         this.Skeleton = new THREE.SkeletonHelper(this.ModelGroup);
-        if (options.onModelLoaded)
-            options.onModelLoaded(this.Model, this.ModelGroup);
         if (this.storeAnimations)
-            this.initAnimations(options);
-        if (options.parent)
-            options.parent.add(this.ModelGroup, this.Skeleton);
+            this.initAnimations();
+        this.setOptions(options);
     }
     determineModelGroup(options) {
         return options.sceneIndex ? this.cloneSkeleton(this.Model.scenes[options.sceneIndex]) : this.cloneSkeleton(this.Model.scene);
     }
-    initAnimations(options) {
+    initAnimations() {
         this.loadAnimations();
         this.Animations.init();
     }
@@ -218,6 +215,12 @@ class GLTFModel extends ECSComponent {
         for (let a of this.Model.animations) {
             this.Animations.Stored[a.name] = new GLTFAnimation(this.Mixer, a);
         }
+    }
+    setOptions(options) {
+        if (options.onModelLoaded)
+            options.onModelLoaded(this.Model, this.ModelGroup);
+        if (options.parent)
+            options.parent.add(this.ModelGroup, this.Skeleton);
     }
     //
     cloneSkeleton(modelGroup) {

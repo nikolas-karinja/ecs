@@ -14,8 +14,8 @@
   "scripts": {
     "build": "tsc && npx rollup --config rollup.config.mjs",
     "package": "npm run build && npm run push && npm version patch && npm publish --access=public",
+    "package-clean": "npm run build && npm version patch && npm publish --access=public",
     "postversion": "git push && git push --tags",
-    "prepare": "npm run build",
     "push": "git add -A && git commit -m \"Setup Package\" && git push",
     "version": "git add -A src"
   },

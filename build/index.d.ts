@@ -109,6 +109,7 @@ declare class GLTFModel extends ECSComponent {
     private determineModelGroup;
     private initAnimations;
     private loadAnimations;
+    private setOptions;
     cloneSkeleton(modelGroup: THREE.Object3D): THREE.Object3D;
     executeCrossFade(startAnimation: GLTFAnimation, endAnimation: GLTFAnimation, duration: number): void;
     hideSkeleton(): void;
