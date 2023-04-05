@@ -13,9 +13,8 @@ export class GLTFAnimation {
 
     constructor ( mixer: THREE.AnimationMixer, clip: THREE.AnimationClip ) {
 
-        this.Clip  = clip
-        this.Mixer = mixer
-
+        this.Clip   = clip
+        this.Mixer  = mixer
         this.Action = this.Mixer.clipAction( this.Clip )
 
     }
@@ -24,7 +23,7 @@ export class GLTFAnimation {
 
 class GLTFAnimationStorage {
 
-    public count: number = 0
+    public count: number               = 0
     public currentBaseAnimName: string = 'idle'
 
     public Stored: { [ key : string ]: GLTFAnimation } = {}
