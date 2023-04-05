@@ -1,13 +1,13 @@
 import { ComponentOptions, ECSComponent } from './ECSComponent'
 import { ECSEntity, EntityOptions } from './ECSEntity'
-import ECSManager from './ECSManager'
+import { ECSSystem } from './ECSSystem'
 
 export * as Components from './components/index'
 
 export { 
     ECSComponent as Component, 
     ECSEntity as Entity, 
-    ECSManager as Manager, 
+    ECSSystem as System, 
 
     ComponentOptions, 
     EntityOptions 

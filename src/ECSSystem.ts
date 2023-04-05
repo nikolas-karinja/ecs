@@ -24,10 +24,10 @@ interface Entities {
 
 }
 
-export default class ECSManager {
+export class ECSSystem {
 
     public ids: number  = 0
-    public name: string = `ecs-manager#${instances + 1}`
+    public name: string = `ecs-system#${instances + 1}`
     public uuid: string = uuidV4()
 
     public Assemblies: { [ key: string ]: any } = {}

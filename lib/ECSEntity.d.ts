@@ -1,5 +1,5 @@
 import { ComponentOptions, ECSComponent } from './ECSComponent';
-import ECSManager from './ECSManager';
+import { ECSSystem } from './ECSSystem';
 export interface EntityOptions {
 }
 export declare class ECSEntity {
@@ -9,9 +9,9 @@ export declare class ECSEntity {
     Components: {
         [key: string]: ECSComponent | any;
     };
-    Manager: ECSManager;
-    Parent: ECSManager;
-    constructor(manager: ECSManager, options?: EntityOptions);
+    System: ECSSystem;
+    Parent: ECSSystem;
+    constructor(system: ECSSystem, options?: EntityOptions);
     addComponent(componentClass: typeof ECSComponent, options?: ComponentOptions): void;
     destroy(): void;
     findEntity(name: string): ECSEntity;

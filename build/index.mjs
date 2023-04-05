@@ -13,8 +13,8 @@ class ECSComponent {
     onUpdate(deltaTime, elapsedTime) { }
     onAnimUpdate(deltaTime, elapsedTime) { }
     // getters
-    get Manager() {
-        return this.Parent.Manager;
+    get System() {
+        return this.Parent.System;
     }
     //
     findEntity(name) {
@@ -41,13 +41,13 @@ class ECSComponent {
 
 let instances$1 = 0;
 class ECSEntity {
-    constructor(manager, options) {
+    constructor(system, options) {
         this.dead = false;
         this.uuid = v4();
         this.name = `ecs-entity#${instances$1 + 1}`;
         this.Components = {};
-        this.Manager = manager;
-        this.Parent = manager;
+        this.System = system;
+        this.Parent = system;
         instances$1++;
     }
     addComponent(componentClass, options) {
@@ -60,9 +60,10 @@ class ECSEntity {
             this.Components[c].destroy();
         }
         this.Components = {};
+        this.dead = true;
     }
     findEntity(name) {
-        return this.Manager.get(name);
+        return this.System.get(name);
     }
     getComponent(name) {
         return this.Components[name];
@@ -73,7 +74,7 @@ class ECSEntity {
         }
     }
     setActive(value) {
-        this.Manager.setActive(this, value);
+        this.System.setActive(this, value);
     }
     setName(name) {
         this.name = name;
@@ -88,10 +89,10 @@ class ECSEntity {
 }
 
 let instances = 0;
-class ECSManager {
+class ECSSystem {
     constructor() {
         this.ids = 0;
-        this.name = `ecs-manager#${instances + 1}`;
+        this.name = `ecs-system#${instances + 1}`;
         this.uuid = v4();
         this.Assemblies = {};
         this.Entities = {
@@ -309,4 +310,4 @@ var index = /*#__PURE__*/Object.freeze({
     GLTFModel: GLTFModel
 });
 
-export { ECSComponent as Component, index as Components, ECSEntity as Entity, ECSManager as Manager };
+export { ECSComponent as Component, index as Components, ECSEntity as Entity, ECSSystem as System };

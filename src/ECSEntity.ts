@@ -1,5 +1,5 @@
 import { ComponentOptions, ECSComponent } from './ECSComponent'
-import ECSManager from './ECSManager'
+import { ECSSystem } from './ECSSystem'
 
 import { v4 as uuidV4 } from 'uuid'
 
@@ -14,13 +14,13 @@ export class ECSEntity {
     public name : string = `ecs-entity#${ instances + 1 }`
 
     public Components: { [ key: string ]: ECSComponent | any } = {}
-    public Manager 
+    public System 
     public Parent
 
-    constructor ( manager: ECSManager, options?: EntityOptions ) {
+    constructor ( system: ECSSystem, options?: EntityOptions ) {
 
-        this.Manager = manager
-        this.Parent  = manager
+        this.System = system
+        this.Parent  = system
 
         instances++
     }
@@ -43,11 +43,14 @@ export class ECSEntity {
         }
 
         this.Components = {}
+
+        this.dead = true
+
     }
 
     findEntity ( name: string ) {
 
-        return this.Manager.get( name )
+        return this.System.get( name )
 
     }
 
@@ -68,7 +71,7 @@ export class ECSEntity {
 
     setActive ( value: boolean ) {
 
-        this.Manager.setActive(this, value)
+        this.System.setActive(this, value)
 
     }
 

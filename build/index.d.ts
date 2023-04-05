@@ -10,9 +10,9 @@ declare class ECSEntity {
     Components: {
         [key: string]: ECSComponent | any;
     };
-    Manager: ECSManager;
-    Parent: ECSManager;
-    constructor(manager: ECSManager, options?: EntityOptions);
+    System: ECSSystem;
+    Parent: ECSSystem;
+    constructor(system: ECSSystem, options?: EntityOptions);
     addComponent(componentClass: typeof ECSComponent, options?: ComponentOptions): void;
     destroy(): void;
     findEntity(name: string): ECSEntity;
@@ -37,7 +37,7 @@ interface Entities {
         [key: string]: number;
     };
 }
-declare class ECSManager {
+declare class ECSSystem {
     ids: number;
     name: string;
     uuid: string;
@@ -67,7 +67,7 @@ declare class ECSComponent {
     initEntity(): void;
     onUpdate(deltaTime: number, elapsedTime: number): void;
     onAnimUpdate(deltaTime: number, elapsedTime: number): void;
-    get Manager(): ECSManager;
+    get System(): ECSSystem;
     findEntity(name: string): ECSEntity;
     getComponent(name: string): any;
     isActive(): boolean;
@@ -132,4 +132,4 @@ declare namespace index_d {
   };
 }
 
-export { ECSComponent as Component, ComponentOptions, index_d as Components, ECSEntity as Entity, EntityOptions, ECSManager as Manager };
+export { ECSComponent as Component, ComponentOptions, index_d as Components, ECSEntity as Entity, EntityOptions, ECSSystem as System };

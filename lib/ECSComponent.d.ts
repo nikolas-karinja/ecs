@@ -10,7 +10,7 @@ export declare class ECSComponent {
     initEntity(): void;
     onUpdate(deltaTime: number, elapsedTime: number): void;
     onAnimUpdate(deltaTime: number, elapsedTime: number): void;
-    get Manager(): import("./ECSManager").default;
+    get System(): import("./ECSSystem").ECSSystem;
     findEntity(name: string): ECSEntity;
     getComponent(name: string): any;
     isActive(): boolean;

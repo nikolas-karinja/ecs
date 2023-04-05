@@ -22,9 +22,9 @@ export class ECSComponent {
 
     // getters
 
-    get Manager () {
+    get System () {
 
-        return this.Parent.Manager
+        return this.Parent.System
 
     }
 
