@@ -17,6 +17,7 @@ export declare class Entity {
     findEntity(name: string): Entity;
     getComponent(name: string): any;
     initEntity(): void;
+    kill(): void;
     setActive(value: boolean): void;
     setName(name: string): void;
     update(deltaTime: number, elapsedTime: number): void;

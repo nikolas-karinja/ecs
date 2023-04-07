@@ -57,7 +57,6 @@ class Entity {
             this.Components[c].destroy();
         }
         this.Components = {};
-        this.dead = true;
     }
     findEntity(name) {
         return this.System.get(name);
@@ -69,6 +68,9 @@ class Entity {
         for (const c in this.Components) {
             this.Components[c].initEntity();
         }
+    }
+    kill() {
+        this.dead = true;
     }
     setActive(value) {
         this.System.setActive(this, value);

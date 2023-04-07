@@ -44,8 +44,6 @@ export class Entity {
 
         this.Components = {}
 
-        this.dead = true
-
     }
 
     findEntity ( name: string ) {
@@ -67,6 +65,12 @@ export class Entity {
             this.Components[ c ].initEntity()
 
         }
+    }
+
+    kill () {
+
+        this.dead = true
+
     }
 
     setActive ( value: boolean ) {
