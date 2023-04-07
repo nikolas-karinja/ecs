@@ -39,14 +39,14 @@ export class System {
 
     }
 
-    add ( entity: Entity, name: string ) {
+    add ( entity: Entity, name?: string ) {
 
-        if ( !name ) name = this.generateName( entity )
+        const n = name ? name : this.generateName( entity )
 
-        this.Entities.map[ name ] = entity
+        this.Entities.map[ n ] = entity
         this.Entities.array.push( entity )
 
-        entity.setName( name )
+        entity.setName( n )
         entity.initEntity()
     }
 
