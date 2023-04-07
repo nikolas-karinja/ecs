@@ -28,6 +28,6 @@ export declare class System {
     generateName(entity: Entity): string;
     get(name: string): Entity;
     setActive(entity: Entity, value: boolean): void;
-    update(deltaTime: number, elapsedTime: number, updateAnim?: boolean): void;
+    update(deltaTime: number, elapsedTime: number): void;
 }
 export {};

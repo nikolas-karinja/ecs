@@ -18,7 +18,6 @@ export class Component {
     initComponent () {}
     initEntity () {}
     onUpdate ( deltaTime: number, elapsedTime: number ) {}
-    onAnimUpdate ( deltaTime: number, elapsedTime: number ) {}
 
     // getters
 
@@ -55,11 +54,9 @@ export class Component {
 
     }
 
-    update ( deltaTime: number, elapsedTime: number, updateAnim: boolean ) {
+    update ( deltaTime: number, elapsedTime: number ) {
 
         this.onUpdate( deltaTime, elapsedTime )
-
-        if ( updateAnim ) this.onAnimUpdate( deltaTime, elapsedTime )
 
     }
 }

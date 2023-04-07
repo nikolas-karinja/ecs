@@ -9,7 +9,6 @@ class Component {
     initComponent() { }
     initEntity() { }
     onUpdate(deltaTime, elapsedTime) { }
-    onAnimUpdate(deltaTime, elapsedTime) { }
     // getters
     get System() {
         return this.Parent.System;
@@ -30,10 +29,8 @@ class Component {
     setActive(value) {
         this.active = value;
     }
-    update(deltaTime, elapsedTime, updateAnim) {
+    update(deltaTime, elapsedTime) {
         this.onUpdate(deltaTime, elapsedTime);
-        if (updateAnim)
-            this.onAnimUpdate(deltaTime, elapsedTime);
     }
 }
 
@@ -77,11 +74,10 @@ class Entity {
     setName(name) {
         this.name = name;
     }
-    update(deltaTime, elapsedTime, updateAnim) {
+    update(deltaTime, elapsedTime) {
         for (const c in this.Components) {
-            if (this.Components[c].active) {
-                this.Components[c].update(deltaTime, elapsedTime, updateAnim);
-            }
+            if (this.Components[c].active)
+                this.Components[c].update(deltaTime, elapsedTime);
         }
     }
 }
@@ -141,12 +137,12 @@ class System {
             this.Entities.array.push(entity);
         }
     }
-    update(deltaTime, elapsedTime, updateAnim = false) {
+    update(deltaTime, elapsedTime) {
         const alive = [];
         const dead = [];
         for (let i = 0; i < this.Entities.array.length; i++) {
             const e = this.Entities.array[i];
-            e.update(deltaTime, elapsedTime, updateAnim);
+            e.update(deltaTime, elapsedTime);
             if (e.dead)
                 dead.push(e);
             else

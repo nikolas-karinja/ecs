@@ -19,5 +19,5 @@ export declare class Entity {
     initEntity(): void;
     setActive(value: boolean): void;
     setName(name: string): void;
-    update(deltaTime: number, elapsedTime: number, updateAnim: boolean): void;
+    update(deltaTime: number, elapsedTime: number): void;
 }

@@ -81,15 +81,11 @@ export class Entity {
 
     }
 
-    update ( deltaTime: number, elapsedTime: number, updateAnim: boolean ) {
+    update ( deltaTime: number, elapsedTime: number ) {
 
         for ( const c in this.Components ) {
 
-            if ( this.Components[ c ].active ) {
-
-                this.Components[ c ].update( deltaTime, elapsedTime, updateAnim )
-
-            }
+            if ( this.Components[ c ].active ) this.Components[ c ].update( deltaTime, elapsedTime )
             
         }
 

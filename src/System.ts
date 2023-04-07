@@ -109,7 +109,7 @@ export class System {
 
     }
 
-    update ( deltaTime: number, elapsedTime: number, updateAnim: boolean = false ) {
+    update ( deltaTime: number, elapsedTime: number ) {
 
         const alive: Entity[] = []
         const dead: Entity[]  = []
@@ -118,7 +118,7 @@ export class System {
 
             const e = this.Entities.array[ i ]
 
-            e.update( deltaTime, elapsedTime, updateAnim )
+            e.update( deltaTime, elapsedTime )
 
             if ( e.dead ) dead.push( e ) 
             else alive.push( e )

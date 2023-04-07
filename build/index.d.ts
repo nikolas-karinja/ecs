@@ -17,7 +17,7 @@ declare class Entity {
     initEntity(): void;
     setActive(value: boolean): void;
     setName(name: string): void;
-    update(deltaTime: number, elapsedTime: number, updateAnim: boolean): void;
+    update(deltaTime: number, elapsedTime: number): void;
 }
 
 interface Assembly {
@@ -49,7 +49,7 @@ declare class System {
     generateName(entity: Entity): string;
     get(name: string): Entity;
     setActive(entity: Entity, value: boolean): void;
-    update(deltaTime: number, elapsedTime: number, updateAnim?: boolean): void;
+    update(deltaTime: number, elapsedTime: number): void;
 }
 
 interface ComponentOptions {
@@ -62,13 +62,12 @@ declare class Component {
     initComponent(): void;
     initEntity(): void;
     onUpdate(deltaTime: number, elapsedTime: number): void;
-    onAnimUpdate(deltaTime: number, elapsedTime: number): void;
     get System(): System;
     findEntity(name: string): Entity;
     getComponent(name: string): any;
     isActive(): boolean;
     setActive(value: boolean): void;
-    update(deltaTime: number, elapsedTime: number, updateAnim: boolean): void;
+    update(deltaTime: number, elapsedTime: number): void;
 }
 
 export { Component, Entity, System };
