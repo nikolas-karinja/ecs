@@ -71,4 +71,4 @@ declare class Component {
     update(deltaTime: number, elapsedTime: number): void;
 }
 
-export { Component, Entity, System };
+export { Component, ComponentOptions, Entity, EntityOptions, System };
