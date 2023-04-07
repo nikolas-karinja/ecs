@@ -1,5 +1,5 @@
-import { ComponentOptions, ECSComponent } from '../ECSComponent';
-import { ECSEntity } from '../ECSEntity';
+import { ComponentOptions, Component } from '../Component';
+import { Entity } from '../Entity';
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
 export declare class GLTFAnimation {
@@ -25,14 +25,14 @@ interface GLTFModelOptions extends ComponentOptions {
     startAnimName?: string;
     storeAnimations?: boolean;
 }
-export declare class GLTFModel extends ECSComponent {
+export declare class GLTFModel extends Component {
     private storeAnimations;
     Animations: GLTFAnimationStorage;
     Mixer: THREE.AnimationMixer;
     Model: GLTF;
     ModelGroup: THREE.Object3D;
     Skeleton: THREE.SkeletonHelper;
-    constructor(parent: ECSEntity, options: GLTFModelOptions);
+    constructor(parent: Entity, options: GLTFModelOptions);
     private determineModelGroup;
     private initAnimations;
     private loadAnimations;

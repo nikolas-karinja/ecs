@@ -1,21 +1,18 @@
-import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
-import * as THREE from 'three';
-
 interface EntityOptions {
 }
-declare class ECSEntity {
+declare class Entity {
     dead: boolean;
     uuid: string;
     name: string;
     Components: {
-        [key: string]: ECSComponent | any;
+        [key: string]: Component | any;
     };
-    System: ECSSystem;
-    Parent: ECSSystem;
-    constructor(system: ECSSystem, options?: EntityOptions);
-    addComponent(componentClass: typeof ECSComponent, options?: ComponentOptions): void;
+    System: System;
+    Parent: System;
+    constructor(system: System, options?: EntityOptions);
+    addComponent(componentClass: typeof Component, options?: ComponentOptions): void;
     destroy(): void;
-    findEntity(name: string): ECSEntity;
+    findEntity(name: string): Entity;
     getComponent(name: string): any;
     initEntity(): void;
     setActive(value: boolean): void;
@@ -24,20 +21,19 @@ declare class ECSEntity {
 }
 
 interface Assembly {
-    assemblyArgs?: any[];
     entityOptions?: EntityOptions;
     entityName?: string;
 }
 interface Entities {
-    array: ECSEntity[];
+    array: Entity[];
     map: {
-        [key: string]: ECSEntity;
+        [key: string]: Entity;
     };
     uses: {
         [key: string]: number;
     };
 }
-declare class ECSSystem {
+declare class System {
     ids: number;
     name: string;
     uuid: string;
@@ -46,90 +42,33 @@ declare class ECSSystem {
     };
     Entities: Entities;
     constructor();
-    add(entity: ECSEntity, name: string): void;
-    assemble(name: string, entityClass?: typeof ECSEntity, options?: Assembly): void;
-    createAssembly(name: string, buildMethod?: (e: ECSEntity) => void): void;
-    filter(cb: () => {}): ECSEntity[];
-    generateName(entity: ECSEntity): string;
-    get(name: string): ECSEntity;
-    setActive(entity: ECSEntity, value: boolean): void;
+    add(entity: Entity, name: string): void;
+    assemble(name: string, entityClass?: typeof Entity, options?: Assembly): void;
+    createAssembly(name: string, buildMethod?: (e: Entity) => void): void;
+    filter(cb: () => {}): Entity[];
+    generateName(entity: Entity): string;
+    get(name: string): Entity;
+    setActive(entity: Entity, value: boolean): void;
     update(deltaTime: number, elapsedTime: number, updateAnim?: boolean): void;
 }
 
 interface ComponentOptions {
 }
-declare class ECSComponent {
+declare class Component {
     active: boolean;
-    Parent: ECSEntity;
-    constructor(parent: ECSEntity, options: ComponentOptions);
+    Parent: Entity;
+    constructor(parent: Entity, options: ComponentOptions);
     destroy(): void;
     initComponent(): void;
     initEntity(): void;
     onUpdate(deltaTime: number, elapsedTime: number): void;
     onAnimUpdate(deltaTime: number, elapsedTime: number): void;
-    get System(): ECSSystem;
-    findEntity(name: string): ECSEntity;
+    get System(): System;
+    findEntity(name: string): Entity;
     getComponent(name: string): any;
     isActive(): boolean;
     setActive(value: boolean): void;
     update(deltaTime: number, elapsedTime: number, updateAnim: boolean): void;
 }
 
-declare class GLTFAnimation {
-    Action: THREE.AnimationAction;
-    Clip: THREE.AnimationClip;
-    Mixer: THREE.AnimationMixer;
-    constructor(mixer: THREE.AnimationMixer, clip: THREE.AnimationClip);
-}
-declare class GLTFAnimationStorage {
-    count: number;
-    currentBaseAnimName: string;
-    Stored: {
-        [key: string]: GLTFAnimation;
-    };
-    activate(name: string): void;
-    init(): void;
-}
-interface GLTFModelOptions extends ComponentOptions {
-    data: GLTF;
-    onModelLoaded?: (model: GLTF, scene: THREE.Object3D) => {};
-    parent?: THREE.Object3D;
-    sceneIndex?: number;
-    startAnimName?: string;
-    storeAnimations?: boolean;
-}
-declare class GLTFModel extends ECSComponent {
-    private storeAnimations;
-    Animations: GLTFAnimationStorage;
-    Mixer: THREE.AnimationMixer;
-    Model: GLTF;
-    ModelGroup: THREE.Object3D;
-    Skeleton: THREE.SkeletonHelper;
-    constructor(parent: ECSEntity, options: GLTFModelOptions);
-    private determineModelGroup;
-    private initAnimations;
-    private loadAnimations;
-    private setOptions;
-    cloneSkeleton(modelGroup: THREE.Object3D): THREE.Object3D;
-    executeCrossFade(startAnimation: GLTFAnimation, endAnimation: GLTFAnimation, duration: number): void;
-    hideSkeleton(): void;
-    playAnimation(name: string, fadeDuration: number): void;
-    playAnimationWithDelay(name: string, fadeDuration: number, delayInSeconds?: number): void;
-    prepareCrossFade(startAnimation: GLTFAnimation, endAnimation: GLTFAnimation, duration: number): void;
-    setTimeScale(speed: number): void;
-    setWeight(animation: GLTFAnimation, weight: number): void;
-    showSkeleton(): void;
-    synchronizeCrossFade(startAnimation: GLTFAnimation, endAnimation: GLTFAnimation, duration: number): void;
-    initComponent(): void;
-    onUpdate(deltaTime: number, elapsedTime: number): void;
-}
-
-type index_d_GLTFModel = GLTFModel;
-declare const index_d_GLTFModel: typeof GLTFModel;
-declare namespace index_d {
-  export {
-    index_d_GLTFModel as GLTFModel,
-  };
-}
-
-export { ECSComponent as Component, ComponentOptions, index_d as Components, ECSEntity as Entity, EntityOptions, ECSSystem as System };
+export { Component, Entity, System };

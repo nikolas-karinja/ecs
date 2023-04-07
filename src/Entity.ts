@@ -1,5 +1,5 @@
-import { ComponentOptions, ECSComponent } from './ECSComponent'
-import { ECSSystem } from './ECSSystem'
+import { ComponentOptions, Component } from './Component'
+import { System } from './System'
 
 import { v4 as uuidV4 } from 'uuid'
 
@@ -7,17 +7,17 @@ let instances = 0
 
 export interface EntityOptions {}
 
-export class ECSEntity {
+export class Entity {
 
     public dead : boolean = false
     public uuid : string = uuidV4()
     public name : string = `ecs-entity#${ instances + 1 }`
 
-    public Components: { [ key: string ]: ECSComponent | any } = {}
+    public Components: { [ key: string ]: Component | any } = {}
     public System 
     public Parent
 
-    constructor ( system: ECSSystem, options?: EntityOptions ) {
+    constructor ( system: System, options?: EntityOptions ) {
 
         this.System = system
         this.Parent  = system
@@ -25,7 +25,7 @@ export class ECSEntity {
         instances++
     }
 
-    addComponent ( componentClass: typeof ECSComponent, options?: ComponentOptions ) {
+    addComponent ( componentClass: typeof Component, options?: ComponentOptions ) {
 
         const C = new componentClass( this, options ? options : {} )
 

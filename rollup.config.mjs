@@ -18,9 +18,9 @@ const config = [
         plugins: [ nodeResolve() ],
         external: [ 
             'uuid', 
-            'three',
-            'three/examples/jsm/loaders/GLTFLoader',
-            'three/examples/jsm/utils/SkeletonUtils.js',
+            // 'three',
+            // 'three/examples/jsm/loaders/GLTFLoader',
+            // 'three/examples/jsm/utils/SkeletonUtils.js',
         ]
     },
     {

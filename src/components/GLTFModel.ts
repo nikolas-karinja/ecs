@@ -1,5 +1,5 @@
-import { ComponentOptions, ECSComponent } from '../ECSComponent'
-import { ECSEntity } from '../ECSEntity'
+import { ComponentOptions, Component } from '../Component'
+import { Entity } from '../Entity'
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 
 import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils.js'
@@ -67,7 +67,7 @@ interface GLTFModelOptions extends ComponentOptions {
 
 }
 
-export class GLTFModel extends ECSComponent {
+export class GLTFModel extends Component {
 
     private storeAnimations: boolean
 
@@ -77,7 +77,7 @@ export class GLTFModel extends ECSComponent {
     public ModelGroup: THREE.Object3D
     public Skeleton: THREE.SkeletonHelper
 
-    constructor ( parent: ECSEntity, options: GLTFModelOptions ) {
+    constructor ( parent: Entity, options: GLTFModelOptions ) {
 
         super( parent, options )
 

@@ -1,14 +1,14 @@
-import { ECSEntity } from './ECSEntity'
+import { Entity } from './Entity'
 
 export interface ComponentOptions {}
 
-export class ECSComponent {
+export class Component {
 
     public active: boolean = true
 
-    public Parent: ECSEntity
+    public Parent: Entity
 
-    constructor ( parent: ECSEntity, options: ComponentOptions ) {
+    constructor ( parent: Entity, options: ComponentOptions ) {
 
         this.Parent  = parent
 

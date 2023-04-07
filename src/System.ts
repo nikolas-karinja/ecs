@@ -1,4 +1,4 @@
-import { ECSEntity, EntityOptions } from './ECSEntity'
+import { Entity, EntityOptions } from './Entity'
 
 import { v4 as uuidV4 } from 'uuid'
 
@@ -6,7 +6,6 @@ let instances = 0
 
 interface Assembly {
 
-    assemblyArgs?  : any[]
     entityOptions? : EntityOptions
     entityName?    : string
 
@@ -14,17 +13,13 @@ interface Assembly {
 
 interface Entities {
 
-    array: ECSEntity[]
-    map: {
-        [ key: string ]: ECSEntity
-    }
-    uses: {
-        [ key: string ]: number
-    }
+    array : Entity[]
+    map   : { [ key: string ]: Entity }
+    uses  : { [ key: string ]: number }
 
 }
 
-export class ECSSystem {
+export class System {
 
     public ids: number  = 0
     public name: string = `ecs-system#${instances + 1}`
@@ -44,7 +39,7 @@ export class ECSSystem {
 
     }
 
-    add ( entity: ECSEntity, name: string ) {
+    add ( entity: Entity, name: string ) {
 
         if ( !name ) name = this.generateName( entity )
 
@@ -55,9 +50,9 @@ export class ECSSystem {
         entity.initEntity()
     }
 
-    assemble ( name: string, entityClass?: typeof ECSEntity, options?: Assembly ) {
+    assemble ( name: string, entityClass?: typeof Entity, options?: Assembly ) {
 
-        const classPicked = entityClass ? entityClass : ECSEntity
+        const classPicked = entityClass ? entityClass : Entity
 
         const e = new classPicked( this, options && options.entityOptions ? options.entityOptions : {} )
 
@@ -68,9 +63,9 @@ export class ECSSystem {
         this.add( e, entityName )
     }
 
-    createAssembly ( name: string, buildMethod?: ( e : ECSEntity ) => void ) {
+    createAssembly ( name: string, buildMethod?: ( e : Entity ) => void ) {
 
-        this.Assemblies[ name ] = buildMethod ? buildMethod : ( e: ECSEntity ) => {}
+        this.Assemblies[ name ] = buildMethod ? buildMethod : ( e: Entity ) => {}
 
     }
 
@@ -80,7 +75,7 @@ export class ECSSystem {
 
     }
 
-    generateName ( entity: ECSEntity ) {
+    generateName ( entity: Entity ) {
 
         this.ids++
 
@@ -94,7 +89,7 @@ export class ECSSystem {
 
     }
 
-    setActive ( entity: ECSEntity, value: boolean ) {
+    setActive ( entity: Entity, value: boolean ) {
 
         const i = this.Entities.array.indexOf( entity )
 
@@ -116,8 +111,8 @@ export class ECSSystem {
 
     update ( deltaTime: number, elapsedTime: number, updateAnim: boolean = false ) {
 
-        const alive: ECSEntity[] = []
-        const dead: ECSEntity[]  = []
+        const alive: Entity[] = []
+        const dead: Entity[]  = []
 
         for ( let i = 0; i < this.Entities.array.length; i++ ) {
 
