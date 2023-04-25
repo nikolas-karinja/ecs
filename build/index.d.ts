@@ -1,3 +1,5 @@
+import { Clock } from '@little-island/time';
+
 interface EntityOptions {
 }
 declare class Entity {
@@ -71,4 +73,12 @@ declare class Component {
     update(deltaTime: number, elapsedTime: number): void;
 }
 
-export { Component, ComponentOptions, Entity, EntityOptions, System };
+declare class StandaloneSystem extends System {
+    delta: number;
+    elapsed: number;
+    Clock: Clock;
+    constructor();
+    loop(): void;
+}
+
+export { Component, ComponentOptions, Entity, EntityOptions, StandaloneSystem, System };

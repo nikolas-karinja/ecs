@@ -158,4 +158,64 @@ class System {
     }
 }
 
-export { Component, Entity, System };
+// taken from three.js r150
+class Clock {
+    constructor(autoStart = true) {
+        this.startTime = 0;
+        this.oldTime = 0;
+        this.elapsedTime = 0;
+        this.running = false;
+        this.autoStart = autoStart;
+    }
+    start() {
+        this.startTime = now();
+        this.oldTime = this.startTime;
+        this.elapsedTime = 0;
+        this.running = true;
+    }
+    stop() {
+        this.getElapsedTime();
+        this.running = false;
+        this.autoStart = false;
+    }
+    getElapsedTime() {
+        this.getDelta();
+        return this.elapsedTime;
+    }
+    getDelta() {
+        let diff = 0;
+        if (this.autoStart && !this.running) {
+            this.start();
+            return 0;
+        }
+        if (this.running) {
+            const newTime = now();
+            diff = (newTime - this.oldTime) / 1000;
+            this.oldTime = newTime;
+            this.elapsedTime += diff;
+        }
+        return diff;
+    }
+}
+function now() {
+    return (typeof performance === 'undefined' ? Date : performance).now(); // see #10732
+}
+
+class StandaloneSystem extends System {
+    constructor() {
+        super();
+        this.delta = 0;
+        this.elapsed = 0;
+        this.Clock = new Clock();
+    }
+    loop() {
+        requestAnimationFrame(() => {
+            this.delta = this.Clock.getDelta();
+            this.elapsed = this.Clock.getElapsedTime();
+            this.update(this.delta, this.elapsed);
+            this.loop();
+        });
+    }
+}
+
+export { Component, Entity, StandaloneSystem, System };
