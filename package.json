@@ -37,6 +37,7 @@
     "typescript": "^5.0.2"
   },
   "dependencies": {
+    "@little-island/time": "^0.1.14",
     "three": "^0.150.1",
     "uuid": "^9.0.0"
   },

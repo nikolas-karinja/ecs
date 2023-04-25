@@ -43,7 +43,7 @@ declare class System {
     };
     Entities: Entities;
     constructor();
-    add(entity: Entity, name: string): void;
+    add(entity: Entity, name?: string): void;
     assemble(name: string, entityClass?: typeof Entity, options?: Assembly): void;
     createAssembly(name: string, buildMethod?: (e: Entity) => void): void;
     filter(cb: () => {}): Entity[];

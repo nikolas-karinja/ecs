@@ -99,11 +99,10 @@ class System {
         instances++;
     }
     add(entity, name) {
-        if (!name)
-            name = this.generateName(entity);
-        this.Entities.map[name] = entity;
+        const n = name ? name : this.generateName(entity);
+        this.Entities.map[n] = entity;
         this.Entities.array.push(entity);
-        entity.setName(name);
+        entity.setName(n);
         entity.initEntity();
     }
     assemble(name, entityClass, options) {
