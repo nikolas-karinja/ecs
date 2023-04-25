@@ -1,6 +1,6 @@
 {
   "name": "@little-island/ecs",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "Modular Entity Component System",
   "main": "./build/index.cjs",
   "module": "./build/index.mjs",
